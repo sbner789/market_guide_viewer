@@ -1,5 +1,5 @@
 import './App.css'
-import MarketGuide from './components/MarketGuide'
+import { MarketGuide } from './components'
 
 function App() {
   return (
