@@ -10,12 +10,31 @@ const useMarketGuideViewer = () => {
         new Map((storeNames ?? []).map((store) => [store.id, store.store_name])),[storeNames]);
 
     useEffect(() => {
-        if (!guideMap || !storeNames) return;
-        const svg = d3.select(viewerRef.current);
+        if (!guideMap || !storeNames || !viewerRef.current) return;
+        const svg = d3.select<SVGSVGElement, unknown>(viewerRef.current);
 
         svg.attr('viewBox', `0 0 ${guideMap.guide_width} ${guideMap.guide_height}`);
 
-        const sectors = svg.selectAll<SVGGElement, MarketGuideSector>('g.sector')
+        const zoomLayer = svg.selectAll<SVGGElement, null>('g.zoom-layer')
+            .data([null])
+            .join('g')
+            .attr('class', 'zoom-layer');
+
+        const zoomed = (event: d3.D3ZoomEvent<SVGSVGElement, unknown>) => {
+            zoomLayer.attr('transform', event.transform.toString());
+        }
+
+        const zoom = d3.zoom<SVGSVGElement, unknown>()
+            .scaleExtent([1, 40])
+            .translateExtent([
+                [-100, -100],
+                [guideMap.guide_width + 100, guideMap.guide_height + 100]
+            ])
+            .on('zoom', zoomed);
+
+        svg.call(zoom);
+
+        const sectors = zoomLayer.selectAll<SVGGElement, MarketGuideSector>('g.sector')
             .data(guideMap.sectors, (sector) => sector.sector)
             .join('g')
             .attr('class', 'sector')
