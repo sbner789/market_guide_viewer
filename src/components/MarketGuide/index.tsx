@@ -11,6 +11,8 @@ const MarketGuide = () => {
                 alignItems: 'center',
                 width: '66.66666666666667%',
                 height: '66.66666666666667%',
+                // width: '100%',
+                // height: '100%',
                 // minWidth: 0,
                 // minHeight: 0,
                 // maxWidth: '1280px',
@@ -21,9 +23,10 @@ const MarketGuide = () => {
                 style={{
                     width: "100%",
                     height: "100%",
+                    border: "1px solid black",
+                    boxSizing: "border-box",
                 }}
                 ref={viewerRef}
-                viewBox={`0 0 ${1440} ${1080}`}
                 preserveAspectRatio="xMidYMid meet"
             ></svg>
         </div>

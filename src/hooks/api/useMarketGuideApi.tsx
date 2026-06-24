@@ -1,21 +1,33 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const INITIAL_GUIDE_MAP = {
+    guide_width: 0,
+    guide_height: 0,
+    sectors: []
+};
+
 const useMarketGuideApi = () => {
-    const [marketGuide, setMarketGuide] = useState<MarketGuideSector[]>();
+    const [guideMap, setGuideMap] = useState<GuideInfoEntry>(INITIAL_GUIDE_MAP);
     const [storeNames, setStoreNames] = useState<StoreNameEntry[]>();
 
     useEffect(() => {
         const fetchMarketGuide = async () => {
             try { 
-                const [ getMarketGuideResponse, getStoreNamesResponse ] = await Promise.all([
-                    axios.get('/local_data/sector.json'),
-                    axios.get('/local_data/test_store_name.json')
+                const [ getStoreNamesResponse, getTestGuideResponse ] = await Promise.all([
+                    axios.get('/local_data/test_store_name.json'),
+                    axios.get('/local_data/gwangmyeong_guide.json')
                 ]);
-                const marketGuideData = getMarketGuideResponse.data;
                 const storeNamesData = getStoreNamesResponse.data;
+                const guideData = getTestGuideResponse.data.sectors;
+                const guideHeight = getTestGuideResponse.data.guide_height;
+                const guideWidth = getTestGuideResponse.data.guide_width;
 
-                setMarketGuide(marketGuideData);
+                setGuideMap({ 
+                    guide_width: guideWidth, 
+                    guide_height: guideHeight,
+                    sectors: guideData 
+                });
                 setStoreNames(storeNamesData);
             } catch (error) {
                 console.error('Error fetching market guide:', error);
@@ -25,8 +37,8 @@ const useMarketGuideApi = () => {
     }, [])            
 
     return {
-        marketGuide,
         storeNames,
+        guideMap
     }
 }
 export default useMarketGuideApi

@@ -4,17 +4,19 @@ import * as d3 from 'd3';
 
 const useMarketGuideViewer = () => {
     const viewerRef = useRef<SVGSVGElement | null>(null);
-    const { marketGuide, storeNames } = useMarketGuideApi();
+    const { storeNames, guideMap } = useMarketGuideApi();
 
     const storeNameMap = useMemo(() =>  
         new Map((storeNames ?? []).map((store) => [store.id, store.store_name])),[storeNames]);
 
     useEffect(() => {
-       if (!marketGuide || !storeNames) return;
-       const svg = d3.select(viewerRef.current);
+        if (!guideMap || !storeNames) return;
+        const svg = d3.select(viewerRef.current);
+
+        svg.attr('viewBox', `0 0 ${guideMap.guide_width} ${guideMap.guide_height}`);
 
         const sectors = svg.selectAll<SVGGElement, MarketGuideSector>('g.sector')
-            .data(marketGuide, (sector) => sector.sector)
+            .data(guideMap.sectors, (sector) => sector.sector)
             .join('g')
             .attr('class', 'sector')
             .attr('id', (sector) => sector.sector);
@@ -40,7 +42,8 @@ const useMarketGuideViewer = () => {
             .attr('width', (store) => store.width)
             .attr('height', (store) => store.height)
             .attr('fill', (store) => store.fill)
-            .attr('stroke', (store) => store.stroke);
+            .attr('stroke', (store) => store.stroke)
+            .attr('stroke-width', (store) => store.strokeWidth);
 
         storeGroups
             .selectAll<SVGTextElement, StoreShape>('text')
@@ -52,8 +55,10 @@ const useMarketGuideViewer = () => {
             .attr('dominant-baseline', 'middle')
             .attr('font-size', 6)
             .attr('writing-mode', (store) => (store.height > store.width ? 'tb' : ''))
-            .text((store) => storeNameMap.get(store.id) ?? '');
-    }, [marketGuide, storeNameMap]);
+            .text((store) => storeNameMap.get(store.id) ?? '')
+            .attr('letter-spacing', '0.5px')
+
+    },[guideMap, storeNameMap]);
 
     return { viewerRef };
 }
