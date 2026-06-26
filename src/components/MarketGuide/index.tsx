@@ -20,6 +20,7 @@ const MarketGuide = () => {
             }}
         >
             <svg
+                id="market_viewer"
                 style={{
                     width: "100%",
                     height: "100%",

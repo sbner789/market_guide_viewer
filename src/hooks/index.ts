@@ -1,7 +1,7 @@
 import useMarketGuideViewer from "./useMarketGuideViewer";
-import useGuideViewerNavigator from "./useGuideViewerNavigator";
+import useGuideViewerUtils from "./useGuideViewerUtils";
 
 export { 
     useMarketGuideViewer, 
-    useGuideViewerNavigator 
+    useGuideViewerUtils 
 };
