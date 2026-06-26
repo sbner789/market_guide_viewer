@@ -1,0 +1,38 @@
+{
+    "guide_width" : 1341.29,
+    "guide_height" : 1011.06,
+    "sectors" : [
+        {
+            "sector": "red",
+            "sections": [
+                {
+                    "section": "1-1",
+                    "stores": [
+                        {
+                            "store": "red_1",
+                            "graphics": {
+                                "space": {
+                                    "type": "rect",
+                                    "x": 1317.29,
+                                    "y": 201.0,
+                                    "width": 18.0,
+                                    "height": 80.0,
+                                    "fill": "#f88",
+                                    "stroke": "#fff",
+                                    "strokeWidth": "2px"
+                                },
+                                "fire_status": {
+                                    "type": "circle",
+                                    "cx": 1326.29,
+                                    "cy": 192,
+                                    "r": 5,
+                                    "fill": "gray"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]   
+}

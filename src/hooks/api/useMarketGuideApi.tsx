@@ -9,19 +9,19 @@ const INITIAL_GUIDE_MAP = {
 
 const useMarketGuideApi = () => {
     const [guideMap, setGuideMap] = useState<GuideInfoEntry>(INITIAL_GUIDE_MAP);
-    const [storeNames, setStoreNames] = useState<StoreNameEntry[]>();
+    const [storeNames, setStoreNames] = useState<StoreDetectorInstallationList[]>();
 
     useEffect(() => {
         const fetchMarketGuide = async () => {
             try { 
-                const [ getStoreNamesResponse, getTestGuideResponse ] = await Promise.all([
+                const [ getStoreNamesResponse, getGuideMapResponse ] = await Promise.all([
                     axios.get('/local_data/test_store_name.json'),
-                    axios.get('/local_data/gwangmyeong_guide.json')
+                    axios.get('/local_data/gwangmyeong_guide_1_1.json')
                 ]);
                 const storeNamesData = getStoreNamesResponse.data;
-                const guideData = getTestGuideResponse.data.sectors;
-                const guideHeight = getTestGuideResponse.data.guide_height;
-                const guideWidth = getTestGuideResponse.data.guide_width;
+                const guideData = getGuideMapResponse.data.sectors;
+                const guideHeight = getGuideMapResponse.data.guide_height;
+                const guideWidth = getGuideMapResponse.data.guide_width;
 
                 setGuideMap({ 
                     guide_width: guideWidth, 

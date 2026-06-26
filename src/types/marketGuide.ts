@@ -11,8 +11,8 @@ declare global {
     };
 
     type MarketGuideSection = {
-        section_name: string;
-        stores: StoreShape[];
+        section: string;
+        stores: MarketGuideStore[];
     };
 
     type StoreNameEntry ={
@@ -20,14 +20,38 @@ declare global {
         store_name: string;
     };
 
-    type StoreShape = {
+    type StoreDetectorInstallationList = {
         id: string;
-        x: number;
-        y: number;
-        width: number;
-        height: number;
-        fill: string;
-        stroke: string;
-        strokeWidth: string;
+        store_name: string;
+        fire_status: "화재 경보" | "정상" | "미수신";
+    };
+
+    type MarketGuideStore = {
+        "store": string;
+        "graphics": StoreShape;
+    };
+
+    type StoreShape = {
+        "space": SpaceShape;
+        "fire_status": FireStatusShape;
+    };
+
+    type SpaceShape = {
+        "type": string;
+        "x": number;
+        "y": number;
+        "width": number;
+        "height": number;
+        "fill": string;
+        "stroke": string;
+        "strokeWidth": string;
+    };
+
+    type FireStatusShape = {
+        "type": string;
+        "cx": number;
+        "cy": number;
+        "r": number;
+        "fill": string;
     };
 };

@@ -1,102 +1,127 @@
 [
     {
         "id": "red_1",
-        "store_name": "나나약국"
+        "store_name": "나나약국",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_2",
-        "store_name": "나나약국앞국화빵" 
+        "store_name": "나나약국앞국화빵",
+        "fire_status": "화재 경보" 
     },
     {
         "id": "red_3",
-        "store_name": "나나약국앞동해상회"
+        "store_name": "나나약국앞동해상회",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_4",
-        "store_name": "반찬천국"
+        "store_name": "반찬천국",
+        "fire_status": "정상"
     },
     {
         "id": "red_5",
-        "store_name": "트라이할인매장"
+        "store_name": "트라이할인매장",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_6",
-        "store_name": "광명축산물직거래장터"
+        "store_name": "광명축산물직거래장터",
+        "fire_status": "정상"
     },
     {
         "id": "red_7",
-        "store_name": "명가순대곱창"
+        "store_name": "명가순대곱창",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_8",
-        "store_name": "옛날뚱보냉면"
+        "store_name": "옛날뚱보냉면",
+        "fire_status": "정상"
     },
     {
         "id": "red_9",
-        "store_name": "못난이맘스브레드"
+        "store_name": "못난이맘스브레드",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_10",
-        "store_name": "못난이왕만두도너츠"
+        "store_name": "못난이왕만두도너츠",
+        "fire_status": "정상"
     },
     {
         "id": "red_11",
-        "store_name": "베르니아화장품"
+        "store_name": "베르니아화장품",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_12",
-        "store_name": "자유마트"
+        "store_name": "자유마트",
+        "fire_status": "정상"
     },
     {
         "id": "red_13",
-        "store_name": "자연이랑옥수수랑"
+        "store_name": "자연이랑옥수수랑",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_14",
-        "store_name": "봉자네순부산상회생선대국"
+        "store_name": "봉자네순부산상회생선대국",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_15",
-        "store_name": "부산상회야채"
+        "store_name": "부산상회야채",
+        "fire_status": "정상"
     },
     {
         "id": "red_16",
-        "store_name": "유명환닭강정"
+        "store_name": "유명환닭강정",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_17",
-        "store_name": "광명시장어사또"
+        "store_name": "광명시장어사또",
+        "fire_status": "정상"
     },
     {
         "id": "red_18",
-        "store_name": "장군축산"
+        "store_name": "장군축산",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_19",
-        "store_name": "정희네 축산 & 건어물"
+        "store_name": "정희네 축산 & 건어물",
+        "fire_status": "정상"
     },
     {
         "id": "red_20",
-        "store_name": "다수제"
+        "store_name": "다수제",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_21",
-        "store_name": "달봉이네 두부"
+        "store_name": "달봉이네 두부",
+        "fire_status": "정상"
     },
     {
         "id": "red_22",
-        "store_name": "새서울참기름"
+        "store_name": "새서울참기름",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_23",
-        "store_name": "청담족발광명점"
+        "store_name": "청담족발광명점",
+        "fire_status": "화재 경보"
     },
     {
         "id": "red_24",
-        "store_name": "카페콩"
+        "store_name": "카페콩",
+        "fire_status": "정상"
     },
     {
         "id": "red_25",
-        "store_name": "광명새금CD기"
+        "store_name": "광명새금CD기",
+        "fire_status": "화재 경보"
     }
 ]
