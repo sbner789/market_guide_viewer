@@ -1,7 +1,9 @@
 import { useMarketGuideViewer } from "@/hooks";
+import { useState } from "react";
 
 const MarketGuide = () => {
-    const { viewerRef } = useMarketGuideViewer();
+    const [market, setMarket] = useState<string>("gwangmyeong");
+    const { viewerRef } = useMarketGuideViewer({ market });
 
     return (
         <div

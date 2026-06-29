@@ -7,8 +7,6 @@ type UseGuideViewerUtils = {
 
 const useGuideViewerUtils = () => {
     const handleZoom = ({ viewer, viewerData } : UseGuideViewerUtils) => {
-        if (!viewer) return;
-
         const viewerLayer = viewer.selectAll<SVGGElement, null>('g.viewer_layer');
 
         const zoomed = (event: d3.D3ZoomEvent<SVGSVGElement, unknown>) => {
@@ -22,7 +20,7 @@ const useGuideViewerUtils = () => {
                 [viewerData.guide_width + 100, viewerData.guide_height + 100]
             ])
             .on('zoom', zoomed);
-
+        
         return zoom;
     }
 

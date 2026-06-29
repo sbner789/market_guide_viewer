@@ -4,12 +4,20 @@ import { useEffect, useMemo, useRef } from "react";
 import * as d3 from 'd3';
 import useCreateMarketGuide from "./marketGuide/useCreateMarketGuide";
 
-const useMarketGuideViewer = () => {
+type SelectMarket = {
+    market: string
+}
+
+const useMarketGuideViewer = ({
+    market
+} : SelectMarket) => {
     const viewerRef = useRef<SVGSVGElement | null>(null);
 
     const { gwangmyeongGuide } = useCreateMarketGuide();
 
     const { storeNames, guideMap } = useMarketGuideApi();
+
+    const { handleZoom } = useGuideViewerUtils();
 
     const storeNameMap = useMemo(() =>  
             new Map((storeNames ?? []).map((store) => [store.id, store.store_name])),[storeNames]);
@@ -18,16 +26,24 @@ const useMarketGuideViewer = () => {
             new Map((storeNames ?? []).map((store) => [store.id, store.fire_status === "화재 경보"])),[storeNames]);
 
     useEffect(() => {
-        if (!guideMap || !viewerRef.current) return;
-        const svg = d3.select<SVGSVGElement, unknown>(viewerRef.current)
-            .attr('viewBox', `0 0 ${guideMap.guide_width} ${guideMap.guide_height}`);
+        if (!viewerRef.current) return;
+        const svg = d3.select<SVGSVGElement, unknown>(viewerRef.current);
 
-        gwangmyeongGuide({ 
-            viewer: svg, 
-            guideEntry: guideMap,
-            storeName: storeNameMap,
-            fireStatus: fireStatusMap
-        });
+        switch (market) {
+            case "gwangmyeong":
+                if (!guideMap) return;
+                svg.attr('viewBox', `0 0 ${guideMap.guide_width} ${guideMap.guide_height}`);
+                svg.call(handleZoom({ viewer: svg, viewerData: guideMap }));
+                gwangmyeongGuide({ 
+                    viewer: svg, 
+                    guideEntry: guideMap,
+                    storeName: storeNameMap,
+                    fireStatus: fireStatusMap
+                });
+                break;
+            default:
+                console.log(`we are missing market.`);
+        }
     }, [guideMap])
 
     return { viewerRef };
