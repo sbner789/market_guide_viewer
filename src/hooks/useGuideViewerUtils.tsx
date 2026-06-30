@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import * as d3 from 'd3';
 
 type UseGuideViewerUtils = {
@@ -6,24 +7,54 @@ type UseGuideViewerUtils = {
 }
 
 const useGuideViewerUtils = () => {
-    const handleZoom = ({ viewer, viewerData } : UseGuideViewerUtils) => {
+    const selectFullscreenRef = useRef<HTMLDivElement | null>(null);
+    const handleZoomAndPanning = ({ viewer, viewerData } : UseGuideViewerUtils) => {
         const viewerLayer = viewer.selectAll<SVGGElement, null>('g.viewer_layer');
+        const { guide_width, guide_height } = viewerData;
 
-        const zoomed = (event: d3.D3ZoomEvent<SVGSVGElement, unknown>) => {
-            viewerLayer.attr('transform', event.transform.toString());
-        }
+        const zoomAndPanningBehavior = d3.zoom<SVGSVGElement, unknown>();
 
-        const zoom = d3.zoom<SVGSVGElement, unknown>()
-            .scaleExtent([1, 40])
-            .translateExtent([
-                [-100, -100],
-                [viewerData.guide_width + 100, viewerData.guide_height + 100]
-            ])
-            .on('zoom', zoomed);
-        
-        return zoom;
-    }
+        const snapToIdentity = () => {
+            viewer.transition().duration(400).call(zoomAndPanningBehavior.transform, d3.zoomIdentity);
+        };
 
-    return { handleZoom }
-}
+        const adjustmentPanningEnd = (event: d3.D3ZoomEvent<SVGSVGElement, unknown>) => {
+            if (event.sourceEvent === null) return;
+
+            const { k, x, y } = event.transform;
+
+            if (k < 1) {
+                snapToIdentity();
+                return;
+            }
+
+            const adjustmentX = Math.abs(x) / k;
+            const adjustmentY = Math.abs(y) / k;
+
+            const limitOptionX = guide_width - adjustmentX < guide_width * 0.1;
+            const limitOptionY = guide_height - adjustmentY < guide_height * 0.1;
+
+            if (limitOptionX || limitOptionY) snapToIdentity();
+        };
+
+        zoomAndPanningBehavior
+            .scaleExtent([0.5, 8])
+            .on('zoom', (event) => {
+                viewerLayer.attr('transform', event.transform.toString());
+            })
+            .on('end', adjustmentPanningEnd);
+
+        return zoomAndPanningBehavior;
+    };
+
+    const handleFullScreen = () => {
+        if (!document.fullscreenElement) {
+            selectFullscreenRef.current?.requestFullscreen();
+        } else {
+            document.exitFullscreen(); 
+        };
+    };
+
+    return { handleZoomAndPanning, handleFullScreen, selectFullscreenRef };
+};
 export default useGuideViewerUtils;

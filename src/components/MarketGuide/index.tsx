@@ -1,26 +1,45 @@
-import { useMarketGuideViewer } from "@/hooks";
+import { useMarketGuideViewer, useGuideViewerUtils } from "@/hooks";
 import { useState } from "react";
 
 const MarketGuide = () => {
-    const [market, setMarket] = useState<string>("gwangmyeong");
+    const [market] = useState<string>("gwangmyeong");
     const { viewerRef } = useMarketGuideViewer({ market });
+    const { handleFullScreen, selectFullscreenRef } = useGuideViewerUtils() ;
 
     return (
         <div
+            id="market_viewer_container"
+            ref={selectFullscreenRef}
             style={{
-                display: 'flex',
-                justifyContent: 'center',
+                position: 'relative',
                 alignItems: 'center',
-                width: '66.66666666666667%',
-                height: '66.66666666666667%',
-                // width: '100%',
-                // height: '100%',
-                // minWidth: 0,
-                // minHeight: 0,
-                // maxWidth: '1280px',
-                // maxHeight: '720px',
+                // width: '66.66666666666667%',
+                // height: '66.66666666666667%',
+                width: '1280px',
+                height: '720px',
             }}
         >
+            <button 
+                style={{ 
+                    position: 'absolute',
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: 'center',
+                    top: "20px",
+                    left: "20px",
+                    minWidth: "120px",
+                    minHeight: "40px",
+                    textAlign: "center",
+                    fontSize: "20px",
+                    borderRadius: "6px",
+                    boxSizing: "border-box"
+                }} 
+                onClick={() => {
+                    handleFullScreen()
+                }}
+            >
+                Fullscreen
+            </button>
             <svg
                 id="market_viewer"
                 style={{

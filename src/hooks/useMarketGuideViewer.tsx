@@ -17,7 +17,7 @@ const useMarketGuideViewer = ({
 
     const { storeNames, guideMap } = useMarketGuideApi();
 
-    const { handleZoom } = useGuideViewerUtils();
+    const { handleZoomAndPanning } = useGuideViewerUtils();
 
     const storeNameMap = useMemo(() =>  
             new Map((storeNames ?? []).map((store) => [store.id, store.store_name])),[storeNames]);
@@ -33,7 +33,7 @@ const useMarketGuideViewer = ({
             case "gwangmyeong":
                 if (!guideMap) return;
                 svg.attr('viewBox', `0 0 ${guideMap.guide_width} ${guideMap.guide_height}`);
-                svg.call(handleZoom({ viewer: svg, viewerData: guideMap }));
+                svg.call(handleZoomAndPanning({ viewer: svg, viewerData: guideMap }));
                 gwangmyeongGuide({ 
                     viewer: svg, 
                     guideEntry: guideMap,
