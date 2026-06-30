@@ -20,10 +20,10 @@ const useMarketGuideViewer = ({
     const { handleZoomAndPanning } = useGuideViewerUtils();
 
     const storeNameMap = useMemo(() =>  
-            new Map((storeNames ?? []).map((store) => [store.id, store.store_name])),[storeNames]);
+        new Map((storeNames ?? []).map((store) => [store.id, store.store_name])),[storeNames]);
         
     const fireStatusMap = useMemo(() =>
-            new Map((storeNames ?? []).map((store) => [store.id, store.fire_status === "화재 경보"])),[storeNames]);
+        new Map((storeNames ?? []).map((store) => [store.id, store.fire_status === "화재 경보"])),[storeNames]);
 
     useEffect(() => {
         if (!viewerRef.current) return;

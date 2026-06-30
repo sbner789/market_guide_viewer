@@ -8,9 +8,9 @@ type CreateGwangMyeongGuide = {
 };
 
 const useCreateMarketGuide = () => {
-     const truncateText = (text: string, maxChars: number) => {
+    const truncateText = (text: string, maxChars: number) => {
         if (text.length <= maxChars) return text;
-        return text.slice(0, maxChars) + '...';
+        return text.slice(0, maxChars) + '···';
     };
 
     const gwangmyeongGuide = ({ 
@@ -114,7 +114,7 @@ const useCreateMarketGuide = () => {
             .attr('font-size', 6)
             .attr('writing-mode', (store) => (store.graphics.space.height > store.graphics.space.width ? 'tb' : ''))
             .text((store) =>  truncateText(storeName.get(store.store) ?? '', 6))
-            .attr('letter-spacing', '0.5px')
+            .attr('letter-spacing', '1px')
             .attr('cursor', "pointer")
             .attr('pointerEvents', 'none')
     };
